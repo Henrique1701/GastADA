@@ -17,6 +17,7 @@ extension Gastos {
         return NSFetchRequest<Gastos>(entityName: "Gastos")
     }
 
-    @NSManaged public var quantidade: Double
+    @NSManaged public var valor: Double
+    @NSManaged public var descricao: String
 
 }

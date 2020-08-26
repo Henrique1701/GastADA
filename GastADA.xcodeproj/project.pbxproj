@@ -16,6 +16,7 @@
 		BE2010AA24EC990B00C0A00A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE2010A824EC990B00C0A00A /* LaunchScreen.storyboard */; };
 		BE2010B324EDAB2D00C0A00A /* Gastos+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2010B124EDAB2D00C0A00A /* Gastos+CoreDataClass.swift */; };
 		BE2010B424EDAB2D00C0A00A /* Gastos+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2010B224EDAB2D00C0A00A /* Gastos+CoreDataProperties.swift */; };
+		BE2010B624F0483D00C0A00A /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2010B524F0483D00C0A00A /* TableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		BE2010AB24EC990B00C0A00A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE2010B124EDAB2D00C0A00A /* Gastos+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Gastos+CoreDataClass.swift"; sourceTree = "<group>"; };
 		BE2010B224EDAB2D00C0A00A /* Gastos+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Gastos+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		BE2010B524F0483D00C0A00A /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 				BE2010A824EC990B00C0A00A /* LaunchScreen.storyboard */,
 				BE2010AB24EC990B00C0A00A /* Info.plist */,
 				BE2010A324EC990800C0A00A /* GastADA.xcdatamodeld */,
+				BE2010B524F0483D00C0A00A /* TableViewCell.swift */,
 			);
 			path = GastADA;
 			sourceTree = "<group>";
@@ -152,6 +155,7 @@
 				BE2010B424EDAB2D00C0A00A /* Gastos+CoreDataProperties.swift in Sources */,
 				BE20109B24EC990800C0A00A /* AppDelegate.swift in Sources */,
 				BE20109D24EC990800C0A00A /* SceneDelegate.swift in Sources */,
+				BE2010B624F0483D00C0A00A /* TableViewCell.swift in Sources */,
 				BE2010B324EDAB2D00C0A00A /* Gastos+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

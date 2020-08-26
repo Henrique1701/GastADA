@@ -12,17 +12,22 @@ import CoreData
 class ViewController: UIViewController {
 
     @IBOutlet weak var moneySpent: UILabel!
+    @IBOutlet weak var tableView: UITableView!
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
-    var countMoneySpent:[NSManagedObject]?
-    //var countMoneySpent:[Gastos]?
+    let defaults = UserDefaults.standard
+    
+    //var countMoneySpent:[NSManagedObject]?
+    var countMoneySpent:[Gastos]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
         fetchSpent()
+        
+        self.tableView.reloadData()
     }
     
     func fetchSpent() {
@@ -30,7 +35,10 @@ class ViewController: UIViewController {
         do{
             self.countMoneySpent = try context.fetch(Gastos.fetchRequest())
             refreshMoneySpent()
-    
+            
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         } catch {
             
         }
@@ -38,15 +46,16 @@ class ViewController: UIViewController {
     
     func refreshMoneySpent() {
         
-        if (countMoneySpent?.isEmpty == false){
+        if (countMoneySpent!.isEmpty == false){
             
-            let spent = countMoneySpent?[0].value(forKey: "quantidade") as! Double
+            print(countMoneySpent!.count)
+            let spent = self.defaults.double(forKey: "gastoTotal")
             moneySpent.text = self.formattedSpent(spent: spent)
             
         } else {
             
             print("Variável não inicializada")
-            moneySpent.text = "0,00"
+            moneySpent.text = formattedSpent(spent: 0)
             
         }
     }
@@ -87,9 +96,13 @@ class ViewController: UIViewController {
         
         // Cria alerta
         let alert = UIAlertController(title: "Adicionar gastos", message: "Diz aí quanto foi o prejuizo agora :(", preferredStyle: .alert)
+        
+        // Adicona text fields e os configura
+        alert.addTextField()
         alert.addTextField()
         alert.textFields![0].attributedPlaceholder = NSAttributedString(string: "100,50")
         alert.textFields![0].keyboardType = UIKeyboardType(rawValue: 8)!
+        alert.textFields![1].placeholder = "Discrição"
         
         // Configurar as ações do botão
         /// Botão para cancelar
@@ -100,18 +113,25 @@ class ViewController: UIViewController {
             
             // Pegar o texto do textfield e tratar valores para salvar no BD
             var spent:Double
+            var description:String
+            
+            description = alert.textFields![1].text!
+            print(description)
+            
             let textField:Double? = self.treatTextfieldInput(input: alert.textFields![0].text!)
             if textField == nil {
                 return
             }
-            if self.countMoneySpent?.isEmpty == true {
-                spent = textField!
-            } else {
-                spent = self.countMoneySpent?[0].value(forKey: "quantidade") as! Double + textField!
-            }
+            spent = textField!
             
-            // Atualizar valores no banco de dados
-            self.countMoneySpent?[0].setValue(spent, forKey: "quantidade")
+            // Cria novo Gasto
+            let newSpent = Gastos(context: self.context)
+            newSpent.descricao = description
+            newSpent.valor = spent
+            
+            // Salva valor no user default
+            let currentDefaults = self.defaults.double(forKey: "gastoTotal")
+            self.defaults.set(currentDefaults + spent, forKey: "gastoTotal")
             
             // Salvar os dados do novo objeto
             do{
@@ -121,7 +141,10 @@ class ViewController: UIViewController {
             }
             
             // Atualizar os dados da label
-            self.moneySpent.text = self.formattedSpent(spent: spent)
+            self.refreshMoneySpent()
+            
+            // Atualizar os dados do array local
+            self.fetchSpent()
         }
         
         // Adicionar botão
@@ -130,6 +153,7 @@ class ViewController: UIViewController {
         
         // Mostrar alerta
         self.present(alert, animated: true, completion: nil)
+        
     }
     
     
@@ -147,7 +171,13 @@ class ViewController: UIViewController {
         let resetButton = UIAlertAction(title: "Resetar", style: .default) { (action) in
             
             // Zerar os gastos que estão no BD
-            self.countMoneySpent?[0].setValue(0, forKey: "quantidade")
+            for i in 0..<self.countMoneySpent!.count {
+                let gastoToRemove = self.countMoneySpent![i]
+                self.context.delete(gastoToRemove)
+            }
+            
+            // Zerar gasto total do user default
+            self.defaults.set(0, forKey: "gastoTotal")
             
             // Salvar a alteração no BD
             do {
@@ -157,6 +187,7 @@ class ViewController: UIViewController {
             }
             
             // Atualizar contéudo da label
+            self.fetchSpent()
             self.refreshMoneySpent()
         }
         
@@ -173,3 +204,34 @@ class ViewController: UIViewController {
     
 }
 
+extension ViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return self.countMoneySpent?.count ?? 0
+
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TableViewCell
+        
+        let spent = countMoneySpent![indexPath.row]
+        
+        cell.valueLabel.text = self.formattedSpent(spent: spent.valor)
+        cell.descriptionLabel.text = spent.descricao
+        //cell.backgroundColor = UIColor(red: 218, green: 254, blue: 208, alpha: 1)
+        cell.isUserInteractionEnabled = false
+        cell.contentView.backgroundColor = UIColor(red: 218, green: 254, blue: 208, alpha: 1)
+        cell.backgroundColor = UIColor(red: 50, green: 50, blue: 50, alpha: 1)
+        
+        return cell
+        
+    }
+    
+    
+}
