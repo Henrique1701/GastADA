@@ -28,6 +28,7 @@ class ViewController: UIViewController {
         fetchSpent()
         
         self.tableView.reloadData()
+        
     }
     
     func fetchSpent() {
@@ -226,8 +227,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         cell.descriptionLabel.text = spent.descricao
         //cell.backgroundColor = UIColor(red: 218, green: 254, blue: 208, alpha: 1)
         cell.isUserInteractionEnabled = false
-        cell.contentView.backgroundColor = UIColor(red: 218, green: 254, blue: 208, alpha: 1)
-        cell.backgroundColor = UIColor(red: 50, green: 50, blue: 50, alpha: 1)
+        cell.backgroundColor = #colorLiteral(red: 0.8548759222, green: 0.9947066903, blue: 0.8174480796, alpha: 1)
         
         return cell
         
