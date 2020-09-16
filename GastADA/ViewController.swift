@@ -103,7 +103,7 @@ class ViewController: UIViewController {
         alert.addTextField()
         alert.textFields![0].attributedPlaceholder = NSAttributedString(string: "100,50")
         alert.textFields![0].keyboardType = UIKeyboardType(rawValue: 8)!
-        alert.textFields![1].placeholder = "Discrição"
+        alert.textFields![1].placeholder = "Descrição"
         
         // Configurar as ações do botão
         /// Botão para cancelar
@@ -226,12 +226,161 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         cell.valueLabel.text = self.formattedSpent(spent: spent.valor)
         cell.descriptionLabel.text = spent.descricao
         //cell.backgroundColor = UIColor(red: 218, green: 254, blue: 208, alpha: 1)
-        cell.isUserInteractionEnabled = false
+        cell.isUserInteractionEnabled = true
         cell.backgroundColor = #colorLiteral(red: 0.8548759222, green: 0.9947066903, blue: 0.8174480796, alpha: 1)
+        
+        let bgColorView = UIView()
+        bgColorView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.5)
+        cell.selectedBackgroundView? = bgColorView
         
         return cell
         
     }
     
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        // Selecionar gasto
+        let spent = self.countMoneySpent![indexPath.row]
+        
+        // Criar alerta
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+
+        
+        // Configurar botão para cancelar
+        let cancelButton = UIAlertAction(title: "Cancelar", style: .cancel) { (action) in
+            
+            // Atualiza dados da table view
+            self.fetchSpent()
+            
+        }
+        
+        // Configurar botão para deletar
+        let deleteButton = UIAlertAction(title: "Deletar", style: .destructive) { (action) in
+            
+            // Adicionar alerta
+            let alertDelete = UIAlertController(title: "Deletar", message: "Tem certeza que você deseja deletar esse gasto?", preferredStyle: .alert)
+            
+            // Configura botão SIM
+            let yesButton = UIAlertAction(title: "Sim", style: .destructive) { (action) in
+                
+                // Pega o valor do gasto atual
+                let currentSpent = spent.valor
+                
+                // Altera o valor total de gastos
+                let currentTotalSpent = self.defaults.double(forKey: "gastoTotal")
+                let updatedSpent = currentTotalSpent - currentSpent
+                self.defaults.set(updatedSpent, forKey: "gastoTotal")
+                
+                // Remover do Core Data
+                let gastoToRemove = self.countMoneySpent![indexPath.row]
+                self.context.delete(gastoToRemove)
+                
+                // TODO: Save the Data
+                do {
+                    try self.context.save()
+                } catch {
+                    print("Erro ao salvar alteração")
+                }
+                
+                // TODO: Re-fetch the data
+                self.fetchSpent()
+            }
+            
+            // Configura botão NÃO
+            let noButton = UIAlertAction(title: "Não", style: .default, handler: nil)
+            
+            // Adiciona botões ao alerta
+            alertDelete.addAction(yesButton)
+            alertDelete.addAction(noButton)
+            
+            // Apresenta a tela do alerta
+            self.present(alertDelete, animated: true, completion: nil)
+            
+        }
+        
+        // Configurar botão de editar
+        let editButton = UIAlertAction(title: "Editar", style: .default) { (action) in
+            
+            // Selecionar gasto
+            let spent = self.countMoneySpent![indexPath.row]
+            
+            // Criar alerta
+            let alert = UIAlertController(title: "Editar gasto", message: "Edite o valor do gasto", preferredStyle: .alert)
+            alert.addTextField()
+            alert.addTextField()
+            
+            let textFieldValor = alert.textFields![0]
+            textFieldValor.text = String(spent.valor)
+            
+            let textFieldDescricao = alert.textFields![1]
+            textFieldDescricao.text = spent.descricao
+            
+            // Configure button handler
+            let saveButton = UIAlertAction(title: "Salvar", style: .default) { (action) in
+                
+                // Pegar informação do text field
+                let textFieldValorText = alert.textFields![0]
+                let textFieldDescricaoText = alert.textFields![1]
+                
+                // Pega o valor do gasto atual
+                let currentSpent = spent.valor
+                
+                // TODO: Edit name property of person object
+                let spentTextField = self.treatTextfieldInput(input: textFieldValorText.text!)
+                
+                print("Verificar erro de entrada:")
+                print(spentTextField)
+                
+                if spentTextField == nil {
+                    return
+                }
+                
+                spent.valor = spentTextField!
+                
+                // Altera o valor total de gastos
+                let currentTotalSpent = self.defaults.double(forKey: "gastoTotal")
+                let updatedSpent = currentTotalSpent + (spent.valor - currentSpent)
+                self.defaults.set(updatedSpent, forKey: "gastoTotal")
+                
+                // Altera a descrição do gasto
+                spent.descricao  = textFieldDescricao.text!
+                
+                // TODO: Save the Data
+                do {
+                    try self.context.save()
+                } catch {
+                    print("Erro ao salvar alteração")
+                }
+                
+                // Atualiza dados da table view
+                self.fetchSpent()
+
+            }
+            
+            // Configurar botão para cancelar
+            let cancelButton = UIAlertAction(title: "Cancelar", style: .cancel) { (action) in
+                // Atualiza dados da table view
+                self.fetchSpent()
+            }
+            
+            // Add button
+            alert.addAction(saveButton)
+            alert.addAction(cancelButton)
+            
+            // Show alert
+            self.present(alert, animated: true, completion: nil)
+            
+        }
+        
+        
+        // Add button
+        alert.addAction(cancelButton)
+        alert.addAction(deleteButton)
+        alert.addAction(editButton)
+        
+        // Show alert
+        self.present(alert, animated: true, completion: nil)
+    }
     
 }
