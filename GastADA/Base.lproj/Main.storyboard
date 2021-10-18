@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -12,12 +14,12 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="GastADA" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sXa-hJ-LLQ">
-                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                                <color key="tintColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <color key="tintColor" systemColor="systemYellowColor"/>
                                 <color key="barTintColor" red="0.85487592219999997" green="0.99470669030000003" blue="0.81744807959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <items>
                                     <navigationItem id="3VF-AK-eOk">
@@ -37,41 +39,45 @@
                                 </items>
                             </navigationBar>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Moeda" translatesAutoresizingMaskIntoConstraints="NO" id="s3v-Cl-GCQ">
-                                <rect key="frame" x="204" y="121" width="121" height="121"/>
+                                <rect key="frame" x="184.5" y="77" width="121" height="121"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="121" id="NgA-Sc-HUf"/>
                                     <constraint firstAttribute="height" constant="121" id="hcE-Jp-E5J"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GastADA" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vYw-iA-Dn2">
-                                <rect key="frame" x="92" y="142" width="230" height="74"/>
+                                <rect key="frame" x="72.5" y="98" width="230" height="74"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="60"/>
-                                <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                <color key="textColor" systemColor="scrollViewTexturedBackgroundColor"/>
                                 <nil key="highlightedColor"/>
-                                <color key="shadowColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="shadowColor" systemColor="secondaryLabelColor"/>
                                 <size key="shadowOffset" width="0.0" height="2"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gfm-qN-Rr8">
+                                <rect key="frame" x="19" y="313" width="337" height="345"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ppw-se-TiC">
-                                <rect key="frame" x="20" y="358" width="374" height="504"/>
-                                <color key="backgroundColor" red="0.85487592219999997" green="0.99470669030000003" blue="0.81744807959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="20" y="314" width="335" height="343"/>
+                                <color key="backgroundColor" red="0.87840205429999996" green="0.99334055190000003" blue="0.84310668710000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" focusStyle="custom" id="jcb-Mk-yKf" customClass="TableViewCell" customModule="GastADA" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="374" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="335" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jcb-Mk-yKf" id="MaI-z4-ALl">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="335" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Descrição" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="11i-BM-I06">
-                                                    <rect key="frame" x="20" y="11" width="77" height="21"/>
+                                                    <rect key="frame" x="16" y="11" width="77" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                                    <color key="textColor" systemColor="scrollViewTexturedBackgroundColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Valor" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KPc-hS-bmj">
-                                                    <rect key="frame" x="315" y="11" width="39" height="21"/>
+                                                    <rect key="frame" x="280" y="11" width="39" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                                    <color key="textColor" systemColor="scrollViewTexturedBackgroundColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -95,16 +101,17 @@
                                 </connections>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="R$ 1000,00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pko-hh-M7P">
-                                <rect key="frame" x="20" y="264" width="374" height="86"/>
+                                <rect key="frame" x="0.5" y="220" width="374" height="86"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="374" id="9K7-mN-LdF"/>
                                     <constraint firstAttribute="height" constant="86" id="fdc-f2-MUO"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="60"/>
-                                <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                <color key="textColor" systemColor="scrollViewTexturedBackgroundColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="0.84936317931462135" green="1" blue="0.82600962271482481" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="s3v-Cl-GCQ" firstAttribute="top" secondItem="sXa-hJ-LLQ" secondAttribute="bottom" constant="33" id="03G-Sg-qD0"/>
@@ -112,17 +119,20 @@
                             <constraint firstItem="ppw-se-TiC" firstAttribute="top" secondItem="pko-hh-M7P" secondAttribute="bottom" constant="8" id="5J6-fG-7Gs"/>
                             <constraint firstItem="sXa-hJ-LLQ" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Avo-fp-5X2"/>
                             <constraint firstItem="vYw-iA-Dn2" firstAttribute="top" secondItem="sXa-hJ-LLQ" secondAttribute="bottom" constant="54" id="Axx-bC-DT4"/>
+                            <constraint firstItem="gfm-qN-Rr8" firstAttribute="bottom" secondItem="ppw-se-TiC" secondAttribute="bottom" constant="1" id="DWp-Hc-Pes"/>
+                            <constraint firstItem="gfm-qN-Rr8" firstAttribute="leading" secondItem="ppw-se-TiC" secondAttribute="leading" constant="-1" id="Ehp-A2-xpI"/>
                             <constraint firstItem="pko-hh-M7P" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="LgZ-f4-XfK"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ppw-se-TiC" secondAttribute="trailing" constant="20" id="T0e-eq-qJI"/>
                             <constraint firstItem="ppw-se-TiC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="TPq-HG-0vx"/>
                             <constraint firstItem="pko-hh-M7P" firstAttribute="top" secondItem="vYw-iA-Dn2" secondAttribute="bottom" constant="48" id="XD3-2G-oLp"/>
+                            <constraint firstItem="gfm-qN-Rr8" firstAttribute="top" secondItem="ppw-se-TiC" secondAttribute="top" constant="-1" id="aEz-qS-9kp"/>
                             <constraint firstItem="ppw-se-TiC" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="cik-ce-ByK"/>
                             <constraint firstItem="vYw-iA-Dn2" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="d4g-EI-Bdk"/>
                             <constraint firstItem="sXa-hJ-LLQ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="fVw-Zg-Fi0"/>
                             <constraint firstItem="vYw-iA-Dn2" firstAttribute="trailing" secondItem="s3v-Cl-GCQ" secondAttribute="trailing" constant="-3" id="gat-Qs-RkJ"/>
-                            <constraint firstItem="ppw-se-TiC" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="tbQ-Bx-sf3"/>
+                            <constraint firstItem="gfm-qN-Rr8" firstAttribute="trailing" secondItem="ppw-se-TiC" secondAttribute="trailing" constant="1" id="pyV-Yd-Hgv"/>
+                            <constraint firstItem="ppw-se-TiC" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="-10" id="tbQ-Bx-sf3"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="moneySpent" destination="pko-hh-M7P" id="vVd-33-7wq"/>
@@ -138,5 +148,14 @@
         <image name="Moeda" width="248" height="248"/>
         <image name="arrow.clockwise" catalog="system" width="115" height="128"/>
         <image name="plus" catalog="system" width="128" height="113"/>
+        <systemColor name="scrollViewTexturedBackgroundColor">
+            <color red="0.43529411764705878" green="0.44313725490196082" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemYellowColor">
+            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>
